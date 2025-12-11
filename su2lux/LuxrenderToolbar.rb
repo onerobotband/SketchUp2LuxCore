@@ -1,5 +1,5 @@
 def create_toolbar
-	main_menu = UI.menu("Plugins").add_submenu("LuxRender")
+	main_menu = UI.menu("Plugins").add_submenu("LuxCoreRender")
 	main_menu.add_item("Render") { (SU2LUX.export_dialog)}
 	main_menu.add_item("Material Editor") {(SU2LUX.show_material_editor(Sketchup.active_model.definitions.entityID))}
 	main_menu.add_item("Lamp Editor") {(SU2LUX.show_lamp_editor(Sketchup.active_model.definitions.entityID))}
@@ -7,6 +7,7 @@ def create_toolbar
 	main_menu.add_item("Scene Settings Editor") { (SU2LUX.show_scene_settings_editor(Sketchup.active_model.definitions.entityID))}
 	main_menu.add_item("Procedural Texture Editor") { (SU2LUX.show_procedural_textures_editor(Sketchup.active_model.definitions.entityID))}
 	main_menu.add_item("Render Engine Settings Editor") { (SU2LUX.show_render_settings_editor(Sketchup.active_model.definitions.entityID))}
+	main_menu.add_item("Network Rendering") { (SU2LUX.show_network_settings_editor(Sketchup.active_model.definitions.entityID))}
 	main_menu.add_item("About SU2LUX") {(SU2LUX.about)}
 	
 	toolbar = UI::Toolbar.new("SU2LUX")
@@ -14,9 +15,9 @@ def create_toolbar
 	cmd_render = UI::Command.new("Render"){(SU2LUX.export_dialog)}
 	cmd_render.small_icon = "icons\\su2lux_render.png"
 	cmd_render.large_icon = "icons\\su2lux_render.png"
-	cmd_render.tooltip = "Export and Render with LuxRender"
+	cmd_render.tooltip = "Export and Render with LuxCoreRender"
 	cmd_render.menu_text = "Render"
-	cmd_render.status_bar_text = "Export and Render with LuxRender"
+	cmd_render.status_bar_text = "Export and Render with LuxCoreRender"
 	@renderbutton = toolbar.add_item(cmd_render)
 
 	cmd_material = UI::Command.new("Material"){(SU2LUX.show_material_editor(Sketchup.active_model.definitions.entityID))}
@@ -72,6 +73,15 @@ def create_toolbar
 	cmd_engine_settings.status_bar_text = "Open SU2LUX Render Engine Settings Window"
     cmd_engine_settings.set_validation_proc{MF_UNCHECKED}
 	@rendersettingsbutton = toolbar.add_item(cmd_engine_settings)
+	
+	cmd_network_settings = UI::Command.new("Network"){(SU2LUX.show_network_settings_editor(Sketchup.active_model.definitions.entityID))}
+	cmd_network_settings.small_icon = "icons\\su2lux_network.png"
+	cmd_network_settings.large_icon = "icons\\su2lux_network.png"
+	cmd_network_settings.tooltip = "Open SU2LUX Network Rendering Settings"
+	cmd_network_settings.menu_text = "Network Rendering"
+	cmd_network_settings.status_bar_text = "Open SU2LUX Network Rendering Settings"
+    cmd_network_settings.set_validation_proc{MF_UNCHECKED}
+	@networksettingsbutton = toolbar.add_item(cmd_network_settings)
 
 	toolbar.show
     return toolbar

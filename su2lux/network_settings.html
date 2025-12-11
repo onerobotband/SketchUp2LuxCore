@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>SU2LUX Network Rendering Settings</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="network_settings.js"></script>
+<link href="common.css" type="text/css" rel="stylesheet">
+<link href="network_settings.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div id="network_settings_panel">
+    
+    <p class="header" id="network_mode">Network Rendering Mode</p>
+    <div class="collapse">
+        <div class="parameter_interface_single">
+            <input type="checkbox" id="network_rendering_enabled">
+            <label for="network_rendering_enabled">Enable Network Rendering</label>
+        </div>
+        
+        <div class="network_enabled_section">
+            <div class="parameter_interface_single">
+                <label for="network_render_mode" class="label1">Render Mode</label>
+                <select id="network_render_mode" class="inputfield1">
+                    <option value="local">Local (Single Machine)</option>
+                    <option value="master">Master (Control Node)</option>
+                    <option value="slave">Slave (Render Node)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <p class="header" id="luxcore_paths">LuxCoreRender Paths</p>
+    <div class="collapse">
+        <div class="parameter_interface_single">
+            <label for="network_luxcore_path_local" class="label1">Local Path</label>
+            <input type="text" id="network_luxcore_path_local" size="30" class="inputfield1">
+            <input type="button" id="browse_local_luxcore" value="Browse" class="browse_button">
+        </div>
+        
+        <div class="parameter_interface_single">
+            <input type="checkbox" id="network_use_network_path">
+            <label for="network_use_network_path">Use Network Path for Rendering</label>
+        </div>
+        
+        <div class="network_path_section">
+            <div class="parameter_interface_single">
+                <label for="network_luxcore_path_network" class="label1">Network Path</label>
+                <input type="text" id="network_luxcore_path_network" size="30" class="inputfield1">
+                <input type="button" id="browse_network_luxcore" value="Browse" class="browse_button">
+            </div>
+            <div class="note">
+                Use a network path (e.g., /Volumes/SharedDrive/LuxCore or \\server\share\LuxCore) 
+                that is accessible from all render nodes.
+            </div>
+        </div>
+    </div>
+
+    <p class="header" id="master_settings">Master Node Settings</p>
+    <div class="collapse master_section">
+        <div class="parameter_interface_single">
+            <label for="network_master_port" class="label1">Listen Port</label>
+            <input type="text" id="network_master_port" size="10" class="inputfield1" value="18018">
+        </div>
+        
+        <div class="parameter_interface_single">
+            <label for="network_threads_per_node" class="label1">Threads per Node</label>
+            <input type="text" id="network_threads_per_node" size="10" class="inputfield1" value="0">
+            <span class="hint">(0 = auto-detect)</span>
+        </div>
+        
+        <div class="parameter_interface_single">
+            <label for="network_output_path" class="label1">Output Path</label>
+            <input type="text" id="network_output_path" size="30" class="inputfield1">
+            <input type="button" id="browse_output_path" value="Browse" class="browse_button">
+        </div>
+    </div>
+
+    <p class="header" id="slave_settings">Slave Nodes</p>
+    <div class="collapse slave_management_section">
+        <div class="parameter_interface_single">
+            <label for="new_slave_address" class="label1">Add Slave Node</label>
+            <input type="text" id="new_slave_address" size="20" class="inputfield1" placeholder="IP or hostname">
+            <input type="button" id="add_slave_button" value="Add" class="add_button">
+        </div>
+        
+        <div class="parameter_interface_single">
+            <label class="label1">Connected Slaves</label>
+            <span id="network_slave_count">0</span>
+        </div>
+        
+        <div id="slave_list" class="slave_list">
+            <div class="no-slaves">No slave nodes configured</div>
+        </div>
+        
+        <div class="parameter_interface_single">
+            <input type="button" id="test_connections" value="Test All Connections" class="test_button">
+        </div>
+    </div>
+
+    <p class="header" id="slave_mode_settings">Slave Mode Settings</p>
+    <div class="collapse slave_mode_section">
+        <div class="parameter_interface_single">
+            <label for="network_master_address" class="label1">Master Address</label>
+            <input type="text" id="network_master_address" size="20" class="inputfield1" placeholder="IP or hostname">
+        </div>
+        
+        <div class="parameter_interface_single">
+            <label for="slave_master_port" class="label1">Master Port</label>
+            <input type="text" id="slave_master_port" size="10" class="inputfield1" value="18018">
+        </div>
+        
+        <div class="parameter_interface_single">
+            <input type="button" id="test_master_connection" value="Test Connection to Master" class="test_button">
+        </div>
+    </div>
+
+    <p class="header" id="render_actions">Render Actions</p>
+    <div class="collapse">
+        <div class="action_buttons">
+            <input type="button" id="start_network_render" value="Start Network Render" class="render_button">
+            <input type="button" id="export_only" value="Export Scene Only" class="export_button">
+        </div>
+        
+        <div class="status_section">
+            <div class="parameter_interface_single">
+                <label class="label1">Status</label>
+                <span id="render_status">Ready</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -340,6 +340,23 @@ class LuxrenderSettings
 		'copy_textures' => true,
 		'preview_size' => 140,
 		'preview_time' => 2,
+		
+		############   Network Rendering   ############
+		'network_rendering_enabled' => false,
+		'network_render_mode' => 'local', # 'local', 'master', 'slave'
+		'network_master_address' => '',
+		'network_master_port' => 18018,
+		'network_slave_addresses' => '', # comma-separated list
+		'network_slave_count' => 0,
+		'network_luxcore_path_local' => '',
+		'network_luxcore_path_network' => '',
+		'network_use_network_path' => false,
+		'network_output_path' => '',
+		'network_threads_per_node' => 0, # 0 = auto
+		
+		############   Section Planes   ############
+		'use_section_planes' => false,
+		'section_plane_export_mode' => 'active', # 'active', 'all', 'none'
 	}
 	@@allDefaultSettings = @@default_settings_render.merge(@@default_settings_texture_and_volume).merge(@@default_settings_global).merge(@@default_settings_scene)	
 		
