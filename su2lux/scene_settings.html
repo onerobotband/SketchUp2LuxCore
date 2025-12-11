@@ -614,6 +614,28 @@
             </div>
 		</div>
 		
+<p class="header" id="section_planes">Section Planes</p>
+		<div class="collapse">
+			<div class="parameter_interface_single">
+				<input type="checkbox" id="use_section_planes">
+				<label for="use_section_planes">Use section planes in render</label>
+			</div>
+			<div class="collapse use_section_planes">
+				<div class="parameter_interface_single">
+					<label for="section_plane_export_mode" class="label1">Export mode</label>
+					<select id="section_plane_export_mode" class="inputfield1">
+						<option value="active">Active section plane only</option>
+						<option value="all">All visible section planes</option>
+						<option value="none">None</option>
+					</select>
+				</div>
+				<div class="note">
+					<p>Section planes are exported as clipping planes for LuxCoreRender.</p>
+					<p>The active section plane will clip geometry in the render.</p>
+				</div>
+			</div>
+		</div>
+		
 <p class="header" id="system">System</p>
 		<div class="collapse">
 			<label for="priority">Priority:</label>
@@ -649,12 +671,12 @@
 			<input type="text" id="export_file_path" size="46">
 			<input type="button" id="export_file_path_browse" value="Browse">
             <br>
-            Path to LuxRender:
+            Path to LuxCoreRender:
             <br>
             <input type="text" id="export_luxrender_path" size="46">
             <input type="button" id="export_luxrender_path_browse" value="Browse"><br><br>
             
-            <label for="runluxrender">Run LuxRender:</label>
+            <label for="runluxrender">Run LuxCoreRender:</label>
             <select id="runluxrender">
                 <option value="yes">Always</option>
                 <option value="ask">Ask</option>

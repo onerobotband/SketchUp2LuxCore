@@ -388,6 +388,7 @@ class LuxrenderSceneSettingsEditor
         @scene_settings_dialog.execute_script('update_subfield("fleximage_colorspace_wp_preset")')
         @scene_settings_dialog.execute_script('update_subfield("fleximage_tonemapkernel")')
         @scene_settings_dialog.execute_script('update_subfield("fleximage_render_time")')
+        @scene_settings_dialog.execute_script('update_boxfield("use_section_planes")')
         
         
 	end # END sendDataFromSketchup

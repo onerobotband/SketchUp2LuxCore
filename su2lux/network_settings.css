@@ -1,0 +1,210 @@
+/* Network Settings CSS for SU2LUX */
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    margin: 10px;
+    background-color: #f5f5f5;
+}
+
+#network_settings_panel {
+    padding: 5px;
+}
+
+.header {
+    font-weight: bold;
+    font-size: 13px;
+    background-color: #4a4a4a;
+    color: white;
+    padding: 6px 10px;
+    margin: 8px 0 0 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.header:hover {
+    background-color: #5a5a5a;
+}
+
+.collapse {
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    margin-bottom: 5px;
+}
+
+.parameter_interface_single {
+    margin: 8px 0;
+    display: block;
+    clear: both;
+}
+
+.label1 {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.inputfield1 {
+    width: 200px;
+}
+
+.browse_button, .add_button {
+    margin-left: 5px;
+    padding: 3px 10px;
+}
+
+.test_button {
+    margin: 10px 0;
+    padding: 5px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.test_button:hover {
+    background-color: #45a049;
+}
+
+.render_button {
+    padding: 8px 20px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.render_button:hover {
+    background-color: #1976D2;
+}
+
+.export_button {
+    padding: 8px 20px;
+    background-color: #607D8B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.export_button:hover {
+    background-color: #455A64;
+}
+
+.action_buttons {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.slave_list {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fafafa;
+}
+
+.slave-item {
+    padding: 5px 10px;
+    margin: 3px 0;
+    background-color: #e3f2fd;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slave-item button {
+    padding: 2px 8px;
+    font-size: 11px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.slave-item button:hover {
+    background-color: #d32f2f;
+}
+
+.no-slaves {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    padding: 10px;
+}
+
+.note {
+    font-size: 11px;
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+    padding-left: 150px;
+}
+
+.hint {
+    font-size: 11px;
+    color: #888;
+    margin-left: 5px;
+}
+
+.status_section {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+#render_status {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* Hide sections by default */
+.network_enabled_section,
+.network_path_section,
+.master_section,
+.slave_management_section,
+.slave_mode_section {
+    display: none;
+}
+
+/* Input styling */
+input[type="text"] {
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+input[type="text"]:focus {
+    border-color: #2196F3;
+    outline: none;
+}
+
+select {
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Button styling */
+input[type="button"] {
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    opacity: 0.9;
+}

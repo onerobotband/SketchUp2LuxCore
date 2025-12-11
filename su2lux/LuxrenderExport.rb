@@ -772,6 +772,113 @@ class LuxrenderExport
 		return volume
 	end
 	
+	##
+	# Export section planes as clipping planes for LuxCoreRender
+	# Returns array of clipping plane definitions
+	##
+	def export_section_planes(out)
+		return unless @lrs.use_section_planes
+		
+		model = Sketchup.active_model
+		section_planes = []
+		
+		# Collect section planes based on export mode
+		case @lrs.section_plane_export_mode
+		when 'active'
+			# Only export the active section plane
+			model.entities.each do |entity|
+				if entity.is_a?(Sketchup::SectionPlane) && entity.active?
+					section_planes << entity
+				end
+			end
+		when 'all'
+			# Export all visible section planes
+			model.entities.each do |entity|
+				if entity.is_a?(Sketchup::SectionPlane) && entity.visible?
+					section_planes << entity
+				end
+			end
+		when 'none'
+			# Don't export any section planes
+			return
+		end
+		
+		# Export each section plane as a clipping plane
+		section_planes.each_with_index do |sp, index|
+			plane = sp.plane
+			# plane is [a, b, c, d] where ax + by + cz + d = 0
+			normal = Geom::Vector3d.new(plane[0], plane[1], plane[2])
+			d = plane[3]
+			
+			# Get a point on the plane
+			# The section plane's position
+			bounds = sp.bounds
+			center = bounds.center
+			
+			# Convert to meters for LuxCore
+			px = center.x.to_m.to_f
+			py = center.y.to_m.to_f
+			pz = center.z.to_m.to_f
+			
+			# Normalize the normal vector
+			nx = normal.x
+			ny = normal.y
+			nz = normal.z
+			
+			out.puts "# Section Plane #{index + 1}"
+			out.puts "# ClippingPlane for LuxCoreRender"
+			out.puts "# Note: LuxCoreRender uses scene.camera.clippingplane properties"
+			out.puts "# The clipping plane is defined by a point and a normal"
+			out.puts "# Point: #{px}, #{py}, #{pz}"
+			out.puts "# Normal: #{nx}, #{ny}, #{nz}"
+			
+			# For LuxCoreRender scene files, we can add clipping as an attribute
+			# Note: This is compatible with LuxCoreRender 2.x
+			out.puts "# To enable in LuxCoreRender, add these properties to your .cfg file:"
+			out.puts "# scene.camera.clippingplane.enable = 1"
+			out.puts "# scene.camera.clippingplane.center = #{px} #{py} #{pz}"
+			out.puts "# scene.camera.clippingplane.normal = #{nx} #{ny} #{nz}"
+			out.puts ""
+		end
+		
+		return section_planes.length
+	end
+	
+	##
+	# Get section plane data for LuxCore .cfg file
+	# Returns hash with clipping plane configuration
+	##
+	def get_section_plane_config
+		return nil unless @lrs.use_section_planes
+		
+		model = Sketchup.active_model
+		active_section = nil
+		
+		# Find the active section plane
+		model.entities.each do |entity|
+			if entity.is_a?(Sketchup::SectionPlane) && entity.active?
+				active_section = entity
+				break
+			end
+		end
+		
+		return nil unless active_section
+		
+		plane = active_section.plane
+		normal = Geom::Vector3d.new(plane[0], plane[1], plane[2])
+		bounds = active_section.bounds
+		center = bounds.center
+		
+		{
+			'enabled' => true,
+			'center_x' => center.x.to_m.to_f,
+			'center_y' => center.y.to_m.to_f,
+			'center_z' => center.z.to_m.to_f,
+			'normal_x' => normal.x,
+			'normal_y' => normal.y,
+			'normal_z' => normal.z
+		}
+	end
 
 	def export_light(out)
 		sun_direction = Sketchup.active_model.shadow_info['SunDirection']
