@@ -181,10 +181,10 @@ class LuxrenderNetworkSettingsEditor
 			slave_array = slaves.split(",").map(&:strip)
 			slave_html = slave_array.map { |s| "<div class='slave-item'>#{s} <button onclick='removeSlave(\"#{s}\")'>Remove</button></div>" }.join("")
 			dialog.execute_script("$('#slave_list').html('#{slave_html}');")
-			dialog.execute_script("$('#network_slave_count').val('#{slave_array.length}');")
+			dialog.execute_script("$('#network_slave_count').text('#{slave_array.length}');")
 		else
 			dialog.execute_script("$('#slave_list').html('<div class=\"no-slaves\">No slave nodes configured</div>');")
-			dialog.execute_script("$('#network_slave_count').val('0');")
+			dialog.execute_script("$('#network_slave_count').text('0');")
 		end
 	end
 	

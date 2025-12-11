@@ -10,7 +10,8 @@ class OSSpecific
 	def initialize
 		@variables = {
 			"default_save_folder" => File.expand_path("~"),
-			# LuxCoreRender uses luxcoreui instead of luxrender
+			# Legacy key name "luxrender_filename" retained for backward compatibility
+			# Now points to LuxCoreRender executable (luxcoreui)
 			"luxrender_filename" => "luxcoreui",
             "file_appendix" => "",
             "luxconsole_filename" => "luxcoreconsole",

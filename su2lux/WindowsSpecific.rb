@@ -10,7 +10,8 @@ class OSSpecific
 	def initialize
 		@variables = {
 			"default_save_folder" => ENV["USERPROFILE"].gsub(File::ALT_SEPARATOR,File::SEPARATOR),
-			# LuxCoreRender uses luxcoreui.exe instead of luxrender
+			# Legacy key name "luxrender_filename" retained for backward compatibility
+			# Now points to LuxCoreRender executable (luxcoreui.exe)
 			"luxrender_filename" => "luxcoreui.exe",
             "luxconsole_filename" => "luxcoreconsole.exe",
 			"path_separator" => "\\",

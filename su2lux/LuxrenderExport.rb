@@ -782,22 +782,17 @@ class LuxrenderExport
 		model = Sketchup.active_model
 		section_planes = []
 		
-		# Collect section planes based on export mode
+		# Collect all section planes in a single pass for efficiency
+		all_section_planes = model.entities.grep(Sketchup::SectionPlane)
+		
+		# Filter based on export mode
 		case @lrs.section_plane_export_mode
 		when 'active'
 			# Only export the active section plane
-			model.entities.each do |entity|
-				if entity.is_a?(Sketchup::SectionPlane) && entity.active?
-					section_planes << entity
-				end
-			end
+			section_planes = all_section_planes.select { |sp| sp.active? }
 		when 'all'
 			# Export all visible section planes
-			model.entities.each do |entity|
-				if entity.is_a?(Sketchup::SectionPlane) && entity.visible?
-					section_planes << entity
-				end
-			end
+			section_planes = all_section_planes.select { |sp| sp.visible? }
 		when 'none'
 			# Don't export any section planes
 			return
@@ -854,13 +849,8 @@ class LuxrenderExport
 		model = Sketchup.active_model
 		active_section = nil
 		
-		# Find the active section plane
-		model.entities.each do |entity|
-			if entity.is_a?(Sketchup::SectionPlane) && entity.active?
-				active_section = entity
-				break
-			end
-		end
+		# Find the active section plane efficiently using grep
+		active_section = model.entities.grep(Sketchup::SectionPlane).find { |sp| sp.active? }
 		
 		return nil unless active_section
 		
